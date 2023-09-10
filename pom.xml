@@ -179,6 +179,9 @@
 					<includes>
 						<include>**/ParallelRun.java</include>
 					</includes>
+					<parallel>methods</parallel>
+					<threadCount>2</threadCount>
+					<useUnlimitedThreads>false</useUnlimitedThreads>
 					<properties>
 						<property>
 							<name>dataproviderthreadcount</name>
