@@ -7,6 +7,7 @@ import static org.testng.Assert.assertEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import driverfactory.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -36,6 +37,7 @@ public class LoginPageStepDefinition {
 	@Then("Verify Search page has displayed after login and verify search box text as {string}")
 	public void verify_search_page_has_displayed_after_login_and_verify_search_box_text_as(String expSearchText) {
 		String searchText = loginpage.getSearchPlaceholderText();
+		//Assert.assertFalse(true);
 		assertEquals(searchText, expSearchText,"Failed to assert Search Text of Search Box placeholder");
 	}
 
@@ -52,6 +54,7 @@ public class LoginPageStepDefinition {
 	@Then("Verify login error message as {string}")
 	public void verify_login_error_message_as(String errorMessage) {
 		String loginErrorMsg = loginpage.getLoginErrorText();
+		//Assert.assertFalse(true);
 		assertEquals(loginErrorMsg, errorMessage, "Failed to assert Login Error message for nagative scenario");
 	}
 

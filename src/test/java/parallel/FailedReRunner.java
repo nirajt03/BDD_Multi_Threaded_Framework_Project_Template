@@ -36,29 +36,25 @@ import io.cucumber.testng.CucumberOptions;
 import screenRecorderUtilities.ScreenRecorderUtil;
 import screenRecorderUtilities.ScreenRecorderUtil.TypeOfScreen;
 
-
 @CucumberOptions(
-		features={".//src/test/resources/parallel/01 LoginPage.feature"},
-		//features=".//src/test/resources/features/04 SearchPage.feature",
-		glue={"parallel"},
-		dryRun=false,
-		//tags="@Custom",
-		monochrome = true,		
 		plugin = {"pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-					"rerun:target/failedrerun.txt"
-				 }
+				"rerun:target/failedrerun.txt"
+				},
+		glue={"parallel"},
+		monochrome = true,			
+		features={"@target/failedrerun.txt"}
 		)
 
-public class ParallelRun extends AbstractTestNGCucumberTests{
+public class FailedReRunner extends AbstractTestNGCucumberTests{
 
-	public static final Logger logger = LogManager.getLogger(ParallelRun.class);
+	public static final Logger logger = LogManager.getLogger(FailedReRunner.class);
 	
 	@Override
 	@DataProvider(parallel = true)
 	public Object[][] scenarios(){
 		return super.scenarios();
 	}
-	
+
 	@BeforeSuite(alwaysRun = true)
 	public void beforeSuite() {
 		try {
@@ -236,4 +232,5 @@ public class ParallelRun extends AbstractTestNGCucumberTests{
 		}
 		return urlList.get(0).get(0);
 	}
+
 }
