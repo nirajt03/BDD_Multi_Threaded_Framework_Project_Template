@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import webElementUtilities.WebElementUtlities;
+import webElementUtilities.WebElementUtility;
 
 public class HomePage extends BasePage{
 
@@ -23,7 +23,7 @@ public class HomePage extends BasePage{
 	 */
 	public void waitForHomePageToBeVisible() {
 		customWaitInSec(1);
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, homePageHeader, 15);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, homePageHeader, 15);
 	}
 	
 	/**
@@ -31,8 +31,8 @@ public class HomePage extends BasePage{
 	 * @return
 	 */
 	public String getHomePageHeader() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, homePageHeader, 15);
-		return WebElementUtlities.getText(driver, driver.findElement(homePageHeader));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, homePageHeader, 15);
+		return WebElementUtility.getText(driver, driver.findElement(homePageHeader));
 	}
 	
 	/**
@@ -40,8 +40,8 @@ public class HomePage extends BasePage{
 	 * @return
 	 */
 	public String getHomePageDescription() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, homePageDescription, 15);
-		return WebElementUtlities.getText(driver, driver.findElement(homePageDescription));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, homePageDescription, 15);
+		return WebElementUtility.getText(driver, driver.findElement(homePageDescription));
 	}
 	
 }

@@ -8,7 +8,10 @@ import static org.testng.Assert.assertEquals;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.aventstack.extentreports.Status;
+
 import driverfactory.DriverFactory;
+import helperTestUtility.ReportLogs;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -16,22 +19,24 @@ import io.cucumber.java.en.When;
 public class LoginPageStepDefinition {
 
 	public static final Logger logger = LogManager.getLogger(LoginPageStepDefinition.class);
-	LoginPage loginpage = new LoginPage(DriverFactory.getDriver());
+	LoginPage loginpage = new LoginPage(DriverFactory.getInstance().getDriver());
 	SearchPage searchpage;
 
 	@Given("User launches the Pluralsight Clone Application using link {string}")
 	public void user_launches_the_pluralsight_clone_application_using_link(String url) {
-		DriverFactory.getDriver().get(url);
+		DriverFactory.getInstance().getDriver().get(url);
 	}
 
 	@Given("Login form should be visible on launch application URL")
 	public void login_form_should_be_visible_on_launch_application_url() {
 		loginpage.waitForLoginFormToBeVisible();
+		ReportLogs.addLog(Status.INFO, "Login Form is Visible");
 	}
 
 	@When("User login as {string}")
 	public void user_login_as(String authority) {
 		searchpage = loginpage.loginToPluralsightApplication(authority);
+		ReportLogs.addLog(Status.INFO, "User Logged in as "+authority);
 	}
 
 	@Then("Verify Search page has displayed after login and verify search box text as {string}")
@@ -44,6 +49,8 @@ public class LoginPageStepDefinition {
 	@Then("Logout from Pluralsight clone application")
 	public void logout_from_pluralsight_clone_application() {
 		loginpage = loginpage.logoutFromPluralsightApplication();
+		ReportLogs.addLogWithMarkUp(Status.INFO, "Logged out from Pluralsight Application");
+		ReportLogs.addLogWithScreenshot(Status.INFO, "Logged out from Pluralsight Application");
 	}
 
 	@When("User should enter credentials as {string} and {string}")

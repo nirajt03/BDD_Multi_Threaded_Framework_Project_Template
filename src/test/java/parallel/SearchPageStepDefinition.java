@@ -20,7 +20,7 @@ import pageObjectModels.SearchPage.SearchPageNavBarListTabs;
 
 public class SearchPageStepDefinition {
 	public static final Logger logger = LogManager.getLogger(SearchPageStepDefinition.class);
-	SearchPage searchPage = new SearchPage(DriverFactory.getDriver());
+	SearchPage searchPage = new SearchPage(DriverFactory.getInstance().getDriver());
 	CoursePage coursePage;
 
 	@Given("Search required course in search box as {string}")

@@ -2,8 +2,8 @@ package helperUtility;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
-import encryptionUtilities.AESEncryptDecryptUtil;
-import encryptionUtilities.AESEncryptDecryptUtil.KeySize;
+import encryptionUtilities.AESEncryptDecryptUtility;
+import encryptionUtilities.AESEncryptDecryptUtility.KeySize;
 
 /**
  * Encrypt Decrypt
@@ -12,11 +12,11 @@ import encryptionUtilities.AESEncryptDecryptUtil.KeySize;
 public class EncryptDecrypt {
 
     private static SecretKey key;
-	private static IvParameterSpec ivParameterSpec = AESEncryptDecryptUtil.generateIv();
+	private static IvParameterSpec ivParameterSpec = AESEncryptDecryptUtility.generateIv();
 	private static String algorithm = "AES/CBC/PKCS5Padding";
 	
 	static {
-			key = AESEncryptDecryptUtil.generateKey(KeySize.OneTwentyEight);
+			key = AESEncryptDecryptUtility.generateKey(KeySize.OneTwentyEight);
 	}
 	
 	/**
@@ -26,7 +26,7 @@ public class EncryptDecrypt {
 	 */
 	public static String encryptString(String textToBeEncrypted) {
 		
-			return AESEncryptDecryptUtil.encryptText(algorithm, textToBeEncrypted, key, ivParameterSpec);
+			return AESEncryptDecryptUtility.encryptText(algorithm, textToBeEncrypted, key, ivParameterSpec);
 
 	}
 	
@@ -37,7 +37,7 @@ public class EncryptDecrypt {
 	 */
 	public static String decryptString(String textToBeDecrypted) {
 		
-		return AESEncryptDecryptUtil.decryptText(algorithm, textToBeDecrypted, key, ivParameterSpec);
+		return AESEncryptDecryptUtility.decryptText(algorithm, textToBeDecrypted, key, ivParameterSpec);
 	}
 	
 

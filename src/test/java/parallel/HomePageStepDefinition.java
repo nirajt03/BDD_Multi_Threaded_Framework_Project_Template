@@ -15,7 +15,7 @@ import pageObjectModels.LoginPage;
 public class HomePageStepDefinition {
 	
 	public static final Logger logger = LogManager.getLogger(HomePageStepDefinition.class);
-	LoginPage loginpage = new LoginPage(DriverFactory.getDriver());
+	LoginPage loginpage = new LoginPage(DriverFactory.getInstance().getDriver());
 	HomePage homePage;
 
 	@Given("User needs to navigate to home page")

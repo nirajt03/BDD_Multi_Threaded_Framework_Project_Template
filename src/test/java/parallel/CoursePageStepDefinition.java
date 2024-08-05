@@ -14,8 +14,8 @@ import pageObjectModels.SearchPage;
 public class CoursePageStepDefinition {
 	
 	public static final Logger logger = LogManager.getLogger(CoursePageStepDefinition.class);
-	SearchPage searchPage = new SearchPage(DriverFactory.getDriver());
-	CoursePage coursePage = new CoursePage(DriverFactory.getDriver());	
+	SearchPage searchPage = new SearchPage(DriverFactory.getInstance().getDriver());
+	CoursePage coursePage = new CoursePage(DriverFactory.getInstance().getDriver());	
 	
 	@Given("Verify selected Course header text as {string}")
 	public void verify_selected_course_header_text_as(String expCourseHeaderText) {

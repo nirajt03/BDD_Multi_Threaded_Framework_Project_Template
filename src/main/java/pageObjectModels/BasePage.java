@@ -19,7 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.google.common.base.Stopwatch;
 
-import webElementUtilities.WebElementUtlities;
+import webElementUtilities.WebElementUtility;
 
 /**
  * Base Page
@@ -64,8 +64,8 @@ public class BasePage {
 	 */
 	public LoginPage logoutFromPluralsightApplication() {
 
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, logoutIcon);
-		WebElementUtlities.click(driver, driver.findElement(logoutIcon));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, logoutIcon);
+		WebElementUtility.click(driver, driver.findElement(logoutIcon));
 		logger.info("Logout button clicked");
 		handleAlert(driver);
 		logger.info("Successfully Logged Out from Pluralsight application");
@@ -77,8 +77,8 @@ public class BasePage {
 	 * @param courseToBeSearched
 	 */
 	public void searchRequiredCourseInSearchBox(String courseToBeSearched) {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, headerSearchBox, 10);
-		WebElementUtlities.setText(driver, driver.findElement(headerSearchBox), courseToBeSearched);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, headerSearchBox, 10);
+		WebElementUtility.setText(driver, driver.findElement(headerSearchBox), courseToBeSearched);
 		driver.findElement(headerSearchBox).sendKeys(Keys.ENTER);
 	}
 
@@ -87,7 +87,7 @@ public class BasePage {
 	 * @return String
 	 */
 	public String getSiteHeaderText() {
-		return WebElementUtlities.getAttributeByValue(driver, driver.findElement(pluralsightIcon));
+		return WebElementUtility.getAttributeByValue(driver, driver.findElement(pluralsightIcon));
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class BasePage {
 	 * @return String
 	 */
 	public String getCourseLinkText() {
-		return WebElementUtlities.getAttributeByValue(driver, driver.findElement(coursesLink));
+		return WebElementUtility.getAttributeByValue(driver, driver.findElement(coursesLink));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class BasePage {
 	 * @return String
 	 */
 	public String getSearchPlaceholderText() {
-		return WebElementUtlities.getAttributeUsingValue(driver, driver.findElement(headerSearchBox),"placeholder");
+		return WebElementUtility.getAttributeUsingValue(driver, driver.findElement(headerSearchBox),"placeholder");
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class BasePage {
 	 * @return String
 	 */
 	public String getStartedIconText() {
-		return WebElementUtlities.getAttributeByValue(driver, driver.findElement(headerSearchBox));
+		return WebElementUtility.getAttributeByValue(driver, driver.findElement(headerSearchBox));
 	}
 
 	/**
@@ -208,7 +208,7 @@ public class BasePage {
 			stopwatch.stop();
 		}
 		customWaitInSec(1);
-		WebElementUtlities.explicitWaitForElementToBeInVisible(driver, invisibleLoaderXpath);
+		WebElementUtility.explicitWaitForElementToBeInVisible(driver, invisibleLoaderXpath);
 	}
 
 	/**
@@ -235,10 +235,10 @@ public class BasePage {
 		else if (buttonTag.equals(ButtonTag.Button))
 			buttonElement=driver.findElement(By.xpath("//button[normalize-space()='"+buttonName+"']"));
 
-		WebElementUtlities.explicitWaitForAllElementToBeVisible(driver, buttonElement);
-		WebElementUtlities.moveToElement(driver, buttonElement);
+		WebElementUtility.explicitWaitForAllElementToBeVisible(driver, buttonElement);
+		WebElementUtility.moveToElement(driver, buttonElement);
 
-		WebElementUtlities.click(driver, buttonElement);
+		WebElementUtility.click(driver, buttonElement);
 		logger.info("Clicked On "+buttonName+" Button");
 	}
 
@@ -257,7 +257,7 @@ public class BasePage {
 	 */
 	public boolean isSuccessPopUpBoxMsgVisible(WebDriver driver, By popUpBox) {
 		boolean flag = false;
-		flag = WebElementUtlities.isElementVisible(driver,popUpBox);
+		flag = WebElementUtility.isElementVisible(driver,popUpBox);
 		return flag;
 	}
 
@@ -266,8 +266,8 @@ public class BasePage {
 	 * @param handlingOperation - select required btn operation applicable on popup
 	 */
 	public void handleSuccessPopUpBox(By handlingOperation) {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver,handlingOperation);
-		WebElementUtlities.click(driver, driver.findElement(handlingOperation));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver,handlingOperation);
+		WebElementUtility.click(driver, driver.findElement(handlingOperation));
 	}
 
 	/**
@@ -283,7 +283,7 @@ public class BasePage {
 	 * @return
 	 */
 	public String switchToNewWindow(WebElement btnToBeClick) {
-		WebElementUtlities.click(driver,btnToBeClick );
+		WebElementUtility.click(driver,btnToBeClick );
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 		for(String newWindow : driver.getWindowHandles()) {
@@ -364,7 +364,7 @@ public class BasePage {
 	public String switchWindowAndGetTitle(WebElement btnToBeClick) {
 		String originalHandle = driver.getWindowHandle();
 		String tabTitle = null;
-		WebElementUtlities.click(driver,btnToBeClick );
+		WebElementUtility.click(driver,btnToBeClick );
 
 		for(String handle : driver.getWindowHandles()) {
 			if (!handle.equals(originalHandle)) {

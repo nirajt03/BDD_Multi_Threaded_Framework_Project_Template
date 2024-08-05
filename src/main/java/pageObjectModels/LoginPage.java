@@ -1,23 +1,21 @@
 package pageObjectModels;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotInteractableException;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
-
-import excelUtilities.ExcelUtilities;
-import exceptions.NoRowFoundException;
-import exceptions.ObjectLengthNotCorrectException;
-import helperUtility.EncryptDecrypt;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.WebDriver;
 
-import webElementUtilities.WebElementUtlities;
+import excelUtilities.ExcelUtility;
+import exceptions.NoRowFoundException;
+import exceptions.ObjectLengthNotCorrectException;
+import helperUtility.EncryptDecrypt;
+import webElementUtilities.WebElementUtility;
 
 /**
  * Login Page
@@ -47,7 +45,7 @@ public class LoginPage extends BasePage{
 	public HashMap<String, String> getUserCredential(String loginType) {
 
 		String path = System.getProperty("driverFilePath");
-		ExcelUtilities excelUtil = new ExcelUtilities(path);
+		ExcelUtility excelUtil = new ExcelUtility(path);
 		HashMap<String, String> map = new HashMap<String, String>();
 
 		// Get Sheet Object
@@ -56,7 +54,7 @@ public class LoginPage extends BasePage{
 		String[][] searchData={{"LoginType",loginType}};
 		ArrayList<HashMap<String, String>> rowData = null;
 		try {
-			rowData = ExcelUtilities.getAllRowsData(sheetObject,searchData);
+			rowData = ExcelUtility.getAllRowsData(sheetObject,searchData);
 		} catch (NoRowFoundException | ObjectLengthNotCorrectException e) {
 			e.printStackTrace();
 		}
@@ -89,7 +87,7 @@ public class LoginPage extends BasePage{
 	 */
 	public void waitForLoginFormToBeVisible() {
 		// Wait till the login page is visible
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver,loginForm);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver,loginForm);
 	}
 
 	/**
@@ -140,7 +138,7 @@ public class LoginPage extends BasePage{
 		refreshPage();
 
 		// Wait till the login page is visible
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver,loginForm);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver,loginForm);
 
 		customWaitInSec(1);
 
@@ -174,8 +172,8 @@ public class LoginPage extends BasePage{
 	 */
 	public boolean checkHeaderRibbonIsVisible() {
 		boolean flag = false;
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, headerRibbonTextVisible, 15);
-		if(!WebElementUtlities.isElementVisible(driver, headerRibbonTextVisible)) {
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, headerRibbonTextVisible, 15);
+		if(!WebElementUtility.isElementVisible(driver, headerRibbonTextVisible)) {
 			throw new ElementNotInteractableException("Header message is not visible");	
 		}
 		flag=true;		
@@ -188,7 +186,7 @@ public class LoginPage extends BasePage{
 	 */
 	public String getHeaderRibbonText() {
 		checkHeaderRibbonIsVisible();		
-		return WebElementUtlities.getText(driver, driver.findElement(headerRibbonTextVisible));
+		return WebElementUtility.getText(driver, driver.findElement(headerRibbonTextVisible));
 	}
 
 	/**
@@ -199,7 +197,7 @@ public class LoginPage extends BasePage{
 		boolean flag = false;
 		if(getHeaderRibbonText().equalsIgnoreCase("Invalid user name or password")) {
 			flag=true;
-			WebElementUtlities.explicitWaitForElementToBeInVisible(driver, headerRibbonTextVisible, 10);
+			WebElementUtility.explicitWaitForElementToBeInVisible(driver, headerRibbonTextVisible, 10);
 		}
 		return flag;
 	}
@@ -209,9 +207,9 @@ public class LoginPage extends BasePage{
 	 * @param userName
 	 */
 	public void enterUsername(String userName) {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, usernameBy, 10);
-		WebElementUtlities.clearText(driver, driver.findElement(usernameBy));
-		WebElementUtlities.setText(driver,driver.findElement(usernameBy),userName);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, usernameBy, 10);
+		WebElementUtility.clearText(driver, driver.findElement(usernameBy));
+		WebElementUtility.setText(driver,driver.findElement(usernameBy),userName);
 	}
 
 	/**
@@ -219,16 +217,16 @@ public class LoginPage extends BasePage{
 	 * @param password
 	 */
 	public void enterPassword(String pwd) {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, passwordBy, 10);
-		WebElementUtlities.clearText(driver, driver.findElement(passwordBy));
-		WebElementUtlities.setText(driver, driver.findElement(passwordBy), pwd);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, passwordBy, 10);
+		WebElementUtility.clearText(driver, driver.findElement(passwordBy));
+		WebElementUtility.setText(driver, driver.findElement(passwordBy), pwd);
 	}
 
 	/**
 	 * Click on Login
 	 */
 	public void clickLogin() {
-		WebElementUtlities.click(driver, driver.findElement(loginBtnBy));
+		WebElementUtility.click(driver, driver.findElement(loginBtnBy));
 	}
 
 }

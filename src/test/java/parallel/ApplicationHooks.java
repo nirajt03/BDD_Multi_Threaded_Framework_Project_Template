@@ -19,6 +19,7 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.cucumber.adapter.*;
 
+import driverfactory.BrowserFactory;
 import driverfactory.DriverFactory;
 import helperUtility.ConfigReader;
 import io.cucumber.java.After;
@@ -29,10 +30,10 @@ public class ApplicationHooks {
 	
 	public static final Logger logger = LogManager.getLogger(ApplicationHooks.class); 
 	
-	private DriverFactory driverFactory;
 	public static WebDriver driver;
 	private ConfigReader configReader;
 	Properties prop;
+	protected BrowserFactory bf = new BrowserFactory();
 
 	static LocalDateTime currentDateTime = LocalDateTime.now();  
 
@@ -61,8 +62,8 @@ public class ApplicationHooks {
 	@Before(order=1)
 	public void launchBrowser(Scenario scenario) {
 		String browserName = prop.getProperty("browser");
-		driverFactory = new DriverFactory();
-		driver=driverFactory.init_driver(browserName);
+		DriverFactory.getInstance().setDriver(bf.createBrowserInstance(browserName));
+		driver = DriverFactory.getInstance().getDriver();
 	}
 
 //	@Before(order=2)
@@ -73,7 +74,7 @@ public class ApplicationHooks {
 	@After(order=0)
 	public void quitBrowser() {
 		logger.info("In After");
-		DriverFactory.closeDriver();
+		DriverFactory.getInstance().closeDriver();
 		//driver.quit();
 	}
 

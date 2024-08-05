@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import webElementUtilities.WebElementUtlities;
+import webElementUtilities.WebElementUtility;
 
 public class CoursePage extends BasePage {
 
@@ -28,8 +28,8 @@ public class CoursePage extends BasePage {
 	 */
 	public String getCoursePageHeader() {
 		customWaitInSec(1);
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, titleHeader, 15);
-		return WebElementUtlities.getText(driver, driver.findElement(titleHeader));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, titleHeader, 15);
+		return WebElementUtility.getText(driver, driver.findElement(titleHeader));
 	}
 	
 	/**
@@ -37,8 +37,8 @@ public class CoursePage extends BasePage {
 	 * @return
 	 */
 	public String getCourseDescription() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, courseDescription, 15);
-		return WebElementUtlities.getText(driver, driver.findElement(courseDescription));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, courseDescription, 15);
+		return WebElementUtility.getText(driver, driver.findElement(courseDescription));
 	}
 	
 	/** 
@@ -46,8 +46,8 @@ public class CoursePage extends BasePage {
 	 * @return
 	 */
 	public boolean validateAuthorLinkVisible() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, authorLink, 10);
-		return WebElementUtlities.isElementVisible(driver, authorLink);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, authorLink, 10);
+		return WebElementUtility.isElementVisible(driver, authorLink);
 	}
 	
 	/**
@@ -55,8 +55,8 @@ public class CoursePage extends BasePage {
 	 * @return
 	 */
 	public String getCourseAuthorName() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, authorLink, 10);
-		return WebElementUtlities.getText(driver, authorLink);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, authorLink, 10);
+		return WebElementUtility.getText(driver, authorLink);
 	}
 	
 	/**
@@ -64,8 +64,8 @@ public class CoursePage extends BasePage {
 	 * @return
 	 */
 	public String getFreeTrailButtonText() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, freeTrailBtn, 15);
-		return WebElementUtlities.getText(driver, driver.findElement(freeTrailBtn));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, freeTrailBtn, 15);
+		return WebElementUtility.getText(driver, driver.findElement(freeTrailBtn));
 	}
 	
 	/**
@@ -73,8 +73,8 @@ public class CoursePage extends BasePage {
 	 * @return
 	 */
 	public String getCourseOverviewButtonText() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, playCourseOverviewBtn, 15);
-		return WebElementUtlities.getText(driver, driver.findElement(playCourseOverviewBtn));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, playCourseOverviewBtn, 15);
+		return WebElementUtility.getText(driver, driver.findElement(playCourseOverviewBtn));
 	}
 	
 	/**
@@ -82,8 +82,8 @@ public class CoursePage extends BasePage {
 	 * @return
 	 */
 	public SearchPage moveToSearchpage() {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, coursesLink, 10);
-		WebElementUtlities.click(driver, driver.findElement(coursesLink));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, coursesLink, 10);
+		WebElementUtility.click(driver, driver.findElement(coursesLink));
 		customWaitInSec(2);
 		return new SearchPage(driver);
 	}

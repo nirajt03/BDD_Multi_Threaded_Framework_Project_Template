@@ -10,7 +10,7 @@ import org.openqa.selenium.ElementNotInteractableException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import webElementUtilities.WebElementUtlities;
+import webElementUtilities.WebElementUtility;
 
 public class SearchPage  extends BasePage{
 
@@ -77,11 +77,11 @@ public class SearchPage  extends BasePage{
 	 * @param filterTag
 	 */
 	public void selectRequiredFilterTab(SearchPageFilterTags filterTag) {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, filtersTab, 10);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, filtersTab, 10);
 		String filterTagValue = filterTag.getSearchPageFilterTagName();
 		By filterTagDiv = By.xpath("//div[text()='"+filterTagValue+"']");
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, filterTagDiv, 10);
-		WebElementUtlities.click(driver, driver.findElement(filterTagDiv));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, filterTagDiv, 10);
+		WebElementUtility.click(driver, driver.findElement(filterTagDiv));
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class SearchPage  extends BasePage{
 	 */
 	public boolean checkSelectedFilterHeaderActive(String filterTagName) {
 		By activeFilterHeader = By.xpath("//div[.='"+filterTagName+"']//parent::h3[contains(@class,'accordion-header-active')]");
-		if(!WebElementUtlities.isElementVisible(driver, activeFilterHeader)) {
+		if(!WebElementUtility.isElementVisible(driver, activeFilterHeader)) {
 			throw new ElementNotInteractableException("Element not found");
 		}
 		return true;
@@ -110,7 +110,7 @@ public class SearchPage  extends BasePage{
 		checkSelectedFilterHeaderActive(filterTagValue);		
 		By filterTagDiv = By.xpath("//div[text()='"+filterTagValue+"']//ancestor::h3[contains(@class,'ui-accordion-header-active')]//following-sibling::div[contains(@class,'ui-accordion-content-active')]//span");
 		List<WebElement> listOfSelectedFilterBy = driver.findElements(filterTagDiv);
-		return WebElementUtlities.getElementsText(driver, listOfSelectedFilterBy);
+		return WebElementUtility.getElementsText(driver, listOfSelectedFilterBy);
 	}
 
 	/**
@@ -121,10 +121,10 @@ public class SearchPage  extends BasePage{
 	public boolean closeSelectedFilterActiveDiv(String filterTagName) {
 		checkSelectedFilterHeaderActive(filterTagName);
 		By activeFilterHeader = By.xpath("//div[.='"+filterTagName+"']//parent::h3[contains(@class,'accordion-header-active')]");
-		WebElementUtlities.click(driver, driver.findElement(activeFilterHeader));
+		WebElementUtility.click(driver, driver.findElement(activeFilterHeader));
 		By collapsedFilterHeader = By.xpath("//div[.='"+filterTagName+"']//parent::h3[contains(@class,'accordion-header-collapsed')]");
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, collapsedFilterHeader, 10);
-		if(!WebElementUtlities.isElementVisible(driver, collapsedFilterHeader)) {
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, collapsedFilterHeader, 10);
+		if(!WebElementUtility.isElementVisible(driver, collapsedFilterHeader)) {
 			throw new ElementNotInteractableException("Element not found");
 		}
 		return true;
@@ -137,11 +137,11 @@ public class SearchPage  extends BasePage{
 	 * @param requiredTab
 	 */
 	public void selectRequiredTabInNavBar(SearchPageNavBarListTabs requiredTab) {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, coursesTab, 10);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, coursesTab, 10);
 		String navBartabValue = requiredTab.getSearchPageNavBarListTabName();
 		By navBarTabDiv = By.xpath("//div[@id='courses_tabs']//a[text()='"+navBartabValue+"']");
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, navBarTabDiv, 10);
-		WebElementUtlities.click(driver, driver.findElement(navBarTabDiv));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, navBarTabDiv, 10);
+		WebElementUtility.click(driver, driver.findElement(navBarTabDiv));
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class SearchPage  extends BasePage{
 	 */
 	public void clickCourseTabDetails() {
 		selectRequiredTabInNavBar(SearchPageNavBarListTabs.Courses);
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, courseTabBlockVisible, 10);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, courseTabBlockVisible, 10);
 	}
 
 	/**
@@ -158,9 +158,9 @@ public class SearchPage  extends BasePage{
 	 * @return
 	 */
 	public int getCoursesListDetailsCount(By xpath) {
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, xpath, 10);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, xpath, 10);
 		List<WebElement> listOfXpathWE = driver.findElements(xpath);
-		return WebElementUtlities.getElementsCount(driver, listOfXpathWE);
+		return WebElementUtility.getElementsCount(driver, listOfXpathWE);
 	}
 
 	/**
@@ -169,13 +169,13 @@ public class SearchPage  extends BasePage{
 	 */
 	public List<String> getCoursesListDetails() {
 		List<String> listOfCourseDetails = new ArrayList<String>();
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, courseTabBlockVisible, 10);
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, courseTabBlockVisible, 10);
 		By coursesList = By.xpath("(//div[contains(@class,'search-results-rows')]//div[contains(@class,'columns')])");
 		int totalCourses = getCoursesListDetailsCount(coursesList);
 		for (int i = 1; i < totalCourses; i++) {
 			By courseTitleBy = By.xpath("(//div[contains(@class,'columns')]//div[contains(@class,'title')])["+i+"]");
-			WebElementUtlities.moveToElement(driver, driver.findElement(courseTitleBy));
-			String courseTitle = WebElementUtlities.getText(driver, driver.findElement(courseTitleBy));
+			WebElementUtility.moveToElement(driver, driver.findElement(courseTitleBy));
+			String courseTitle = WebElementUtility.getText(driver, driver.findElement(courseTitleBy));
 		    listOfCourseDetails.add(courseTitle);			
 		}
 		return listOfCourseDetails;
@@ -193,7 +193,7 @@ public class SearchPage  extends BasePage{
 			clearAllTabs();
 			selectRequiredTabInNavBar(tab);
 			By tabDetailstext = By.xpath("//div[contains(@id,'tabs') and @style='display: block;']//p");
-			detailsText = WebElementUtlities.getText(driver, driver.findElement(tabDetailstext));
+			detailsText = WebElementUtility.getText(driver, driver.findElement(tabDetailstext));
 			listOfTabDetails.add(detailsText);
 		}	
 		return listOfTabDetails;
@@ -203,14 +203,14 @@ public class SearchPage  extends BasePage{
 	 * clear All Tabs
 	 */
 	public void clearAllTabs() {		
-		if(WebElementUtlities.isElementVisible(driver, clearActiveAllTabs)) {
-			WebElementUtlities.explicitWaitForElementToBeVisible(driver, clearActiveAllTabs, 10);
-			WebElementUtlities.moveToElement(driver, driver.findElement(clearActiveAllTabs));
-			WebElementUtlities.click(driver, driver.findElement(clearActiveAllTabs));
+		if(WebElementUtility.isElementVisible(driver, clearActiveAllTabs)) {
+			WebElementUtility.explicitWaitForElementToBeVisible(driver, clearActiveAllTabs, 10);
+			WebElementUtility.moveToElement(driver, driver.findElement(clearActiveAllTabs));
+			WebElementUtility.click(driver, driver.findElement(clearActiveAllTabs));
 		}else {
-			WebElementUtlities.explicitWaitForElementToBeVisible(driver, clearAllTabs, 10);
-			WebElementUtlities.moveToElement(driver, driver.findElement(clearAllTabs));
-			WebElementUtlities.click(driver, driver.findElement(clearAllTabs));
+			WebElementUtility.explicitWaitForElementToBeVisible(driver, clearAllTabs, 10);
+			WebElementUtility.moveToElement(driver, driver.findElement(clearAllTabs));
+			WebElementUtility.click(driver, driver.findElement(clearAllTabs));
 		}
 	}
 	
@@ -220,8 +220,8 @@ public class SearchPage  extends BasePage{
 	 */
 	public void clickOnRequiredCourse(String courseName) {
 		By courseTitleBy = By.xpath("(//div[contains(@class,'columns')]//div[contains(@class,'title')]//a[text()='"+courseName+"'])");
-		WebElementUtlities.explicitWaitForElementToBeVisible(driver, courseTitleBy, 10);
-		WebElementUtlities.click(driver, driver.findElement(courseTitleBy));
+		WebElementUtility.explicitWaitForElementToBeVisible(driver, courseTitleBy, 10);
+		WebElementUtility.click(driver, driver.findElement(courseTitleBy));
 	}
 	
 	/**
