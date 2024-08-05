@@ -16,6 +16,9 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import driverfactory.DriverFactory;
 
 
+/**
+ * Report Logs
+ */
 public class ReportLogs {
 
 	public static final Logger logger = LogManager.getLogger(ReportLogs.class);
