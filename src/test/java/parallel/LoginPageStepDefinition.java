@@ -1,12 +1,10 @@
 package parallel;
 
-import pageObjectModels.LoginPage;
-import pageObjectModels.SearchPage;
-
 import static org.testng.Assert.assertEquals;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.testng.Assert;
 
 import com.aventstack.extentreports.Status;
 
@@ -15,6 +13,8 @@ import helperTestUtility.ReportLogs;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageObjectModels.LoginPage;
+import pageObjectModels.SearchPage;
 
 public class LoginPageStepDefinition {
 
@@ -42,25 +42,29 @@ public class LoginPageStepDefinition {
 	@Then("Verify Search page has displayed after login and verify search box text as {string}")
 	public void verify_search_page_has_displayed_after_login_and_verify_search_box_text_as(String expSearchText) {
 		String searchText = loginpage.getSearchPlaceholderText();
+		ReportLogs.addLogForStringComparison(searchText, expSearchText,"Search Text Box Text");
 		//Assert.assertFalse(true);
 		assertEquals(searchText, expSearchText,"Failed to assert Search Text of Search Box placeholder");
+		ReportLogs.addLogWithScreenshot(Status.INFO,"Verified login functionality");
 	}
 
 	@Then("Logout from Pluralsight clone application")
 	public void logout_from_pluralsight_clone_application() {
 		loginpage = loginpage.logoutFromPluralsightApplication();
-		ReportLogs.addLogWithMarkUp(Status.INFO, "Logged out from Pluralsight Application");
-		ReportLogs.addLogWithScreenshot(Status.INFO, "Logged out from Pluralsight Application");
+		ReportLogs.addLog(Status.INFO,"Successfully logged out of Pluralsight Application");	
 	}
 
 	@When("User should enter credentials as {string} and {string}")
 	public void user_should_enter_credentials_as_and(String username, String password) {
         loginpage.checkNegativeLoginScenarios(username, password);
+		ReportLogs.addLogWithScreenshot(Status.INFO, "Checked Negative Login Scenario for Pluralsight Application");
+
 	}
 
 	@Then("Verify login error message as {string}")
 	public void verify_login_error_message_as(String errorMessage) {
 		String loginErrorMsg = loginpage.getLoginErrorText();
+		ReportLogs.addLogForStringComparison(loginErrorMsg, errorMessage,"Validated login error message");
 		//Assert.assertFalse(true);
 		assertEquals(loginErrorMsg, errorMessage, "Failed to assert Login Error message for nagative scenario");
 	}

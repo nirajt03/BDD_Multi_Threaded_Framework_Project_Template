@@ -29,7 +29,7 @@ public class ReportLogs {
      * @param message The log message.
      */
     public static void addLog(Status status, String message) {
-        ExtentCucumberAdapter.getCurrentStep().log(status, "Log message: "+message);
+        ExtentCucumberAdapter.getCurrentStep().log(status, "Log Message: " + status + " - " + message);
         logger.info("Log Message: " + status + " - " + message);
     }
 
@@ -40,7 +40,7 @@ public class ReportLogs {
      */
     public static void addLogWithMarkUp(Status status, String message) {
         ExtentColor color = getColorForStatus(status);
-        ExtentCucumberAdapter.getCurrentStep().log(status, MarkupHelper.createLabel("Log message: "+message, color));
+        ExtentCucumberAdapter.getCurrentStep().log(status, MarkupHelper.createLabel("Log Message: " + status + " - " + message, color));
         logger.info("Log Message: " + status + " - " + message);
     }
 
@@ -62,7 +62,7 @@ public class ReportLogs {
     public static void addLogWithScreenshot(Status status, String message) {
         try {
             String screenshot = getBase64Image();
-            ExtentCucumberAdapter.getCurrentStep().log(status,"Log message: "+ message, MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot).build());
+            ExtentCucumberAdapter.getCurrentStep().log(status,"Log Message: " + status + " - " + message, MediaEntityBuilder.createScreenCaptureFromBase64String(screenshot).build());
             ExtentCucumberAdapter.addTestStepLog("Screenshot is attached");
         } catch (WebDriverException e) {
             logger.error("Failed to capture screenshot: " + e.getMessage(), e);
