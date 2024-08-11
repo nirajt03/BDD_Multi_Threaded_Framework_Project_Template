@@ -4,7 +4,7 @@ Feature: Course Page Functionality for Pluralsight Clone Application
   Background: 
     Given User launches the Pluralsight Clone Application using link "https://nirajt03.github.io/sample-website/"
 
-  Scenario Outline: Verify Course Page Features
+  Scenario Outline: Verify Course Page Features (TCs-006,TCs-007,TCs-008,TCs-008)
     Given User login as "<Authority>"
     And Click on Course tab in Nav Bar List
     When Select required course from filtered course list and Move to Course page as "<Course Name>"

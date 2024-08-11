@@ -4,7 +4,7 @@ Feature: Search Page functionalities for Pluralsight Clone Application
   Background: 
     Given User launches the Pluralsight Clone Application using link "https://nirajt03.github.io/sample-website/"
 
-  Scenario Outline: Verify Search Page features
+  Scenario Outline: Verify Search Page features (TCs-012,TCs-013,TCs-014,TCs-015)
     Given User login as "<Authority>"
     And Search required course in search box as "<Course Name>"
     Then Verify selected filter tabs options
@@ -19,7 +19,7 @@ Feature: Search Page functionalities for Pluralsight Clone Application
       | User      | Java Fundamentals: The Java Language |
 
  
-  Scenario Outline: Verify Search Java Course functionality
+  Scenario Outline: Verify Search Java Course functionality (TCs-016,TCs-017,TCs-018,TCs-019,TCs-020)
     Given User login as "<Authority>"
     And Search required course in search box as "<Course Name>"
     Then Click on Course tab in Nav Bar List

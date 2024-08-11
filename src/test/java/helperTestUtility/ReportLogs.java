@@ -28,9 +28,9 @@ public class ReportLogs {
      * @param status The log status.
      * @param message The log message.
      */
-    public static void addLog(Status status, String message) {
-        ExtentCucumberAdapter.getCurrentStep().log(status, "Log Message: " + status + " - " + message);
-        logger.info("Log Message: " + status + " - " + message);
+	 public static void addLog(Status status, String message) {
+    	 ExtentCucumberAdapter.getCurrentStep().log(status, MarkupHelper.createLabel("Log Message: " + status + " - " + message, ExtentColor.TEAL));
+         logger.info("Log Message: " + status + " - " + message);
     }
 
     /**

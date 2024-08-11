@@ -4,7 +4,7 @@ Feature: Home Page Functionality for Pluralsight Clone Application
   Background: 
     Given User launches the Pluralsight Clone Application using link "https://nirajt03.github.io/sample-website/"
 
-  Scenario Outline: Verify home page features
+  Scenario Outline: Verify home page features (TCs-008,TCs-009,TCs-010,TCs-011)
     Given User login as "<Authority>"
     And User needs to navigate to home page
     When Home Page must be visible to user
