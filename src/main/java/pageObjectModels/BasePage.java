@@ -25,7 +25,7 @@ import webElementUtilities.WebElementUtility;
  * Base Page
  * @author Niraj.Tiwari
  */
-public class BasePage {
+public  abstract class BasePage {
 
 	protected WebDriver driver;
 	
